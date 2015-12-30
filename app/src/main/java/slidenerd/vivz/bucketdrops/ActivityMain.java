@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import slidenerd.vivz.bucketdrops.adapters.AdapterDrops;
+
 //TODO add a layout manager for the RecyclerView
 public class ActivityMain extends AppCompatActivity {
 
@@ -36,6 +38,7 @@ public class ActivityMain extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mBtnAdd = (Button) findViewById(R.id.btn_add);
         mRecycler = (RecyclerView) findViewById(R.id.rv_drops);
+        mRecycler.setAdapter(new AdapterDrops(this));
         mBtnAdd.setOnClickListener(mBtnAddListener);
         setSupportActionBar(mToolbar);
         initBackgroundImage();
