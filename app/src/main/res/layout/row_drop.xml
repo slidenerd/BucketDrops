@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_row_drop"
+    android:padding="@dimen/row_drop_padding">
+
+    <ImageView
+        android:layout_width="@dimen/iv_drop_size"
+        android:layout_height="@dimen/iv_drop_size"
+        android:background="@null"
+        android:src="@drawable/ic_drop" />
+
+    <TextView
+        android:id="@+id/tv_what"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/tv_what_horizontal_padding"
+        android:paddingRight="@dimen/tv_what_horizontal_padding" />
+
+    <TextView
+        android:id="@+id/tv_when"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
