@@ -2,7 +2,6 @@ package slidenerd.vivz.bucketdrops;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +15,7 @@ import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import slidenerd.vivz.bucketdrops.adapters.AdapterDrops;
 import slidenerd.vivz.bucketdrops.beans.Drop;
+import slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView;
 
 //TODO add a layout manager for the RecyclerView
 public class ActivityMain extends AppCompatActivity {
@@ -23,9 +23,10 @@ public class ActivityMain extends AppCompatActivity {
     public static final String TAG = "VIVZ";
     Toolbar mToolbar;
     Button mBtnAdd;
-    RecyclerView mRecycler;
+    BucketRecyclerView mRecycler;
     Realm mRealm;
     RealmResults<Drop> mResults;
+    View mEmptyView;
     AdapterDrops mAdapter;
     private View.OnClickListener mBtnAddListener = new View.OnClickListener() {
 
@@ -55,8 +56,11 @@ public class ActivityMain extends AppCompatActivity {
         mRealm = Realm.getDefaultInstance();
         mResults = mRealm.where(Drop.class).findAllAsync();
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mEmptyView = findViewById(R.id.empty_drops);
         mBtnAdd = (Button) findViewById(R.id.btn_add);
-        mRecycler = (RecyclerView) findViewById(R.id.rv_drops);
+        mRecycler = (BucketRecyclerView) findViewById(R.id.rv_drops);
+        mRecycler.hideIfEmpty(mToolbar);
+        mRecycler.showIfEmpty(mEmptyView);
         mAdapter = new AdapterDrops(this, mResults);
         mRecycler.setAdapter(mAdapter);
         mBtnAdd.setOnClickListener(mBtnAddListener);
