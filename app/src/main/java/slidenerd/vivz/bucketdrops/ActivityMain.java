@@ -2,6 +2,7 @@ package slidenerd.vivz.bucketdrops;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import slidenerd.vivz.bucketdrops.adapters.AdapterDrops;
+import slidenerd.vivz.bucketdrops.adapters.Divider;
 import slidenerd.vivz.bucketdrops.beans.Drop;
 import slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView;
 
@@ -59,6 +61,7 @@ public class ActivityMain extends AppCompatActivity {
         mEmptyView = findViewById(R.id.empty_drops);
         mBtnAdd = (Button) findViewById(R.id.btn_add);
         mRecycler = (BucketRecyclerView) findViewById(R.id.rv_drops);
+        mRecycler.addItemDecoration(new Divider(this, LinearLayoutManager.VERTICAL));
         mRecycler.hideIfEmpty(mToolbar);
         mRecycler.showIfEmpty(mEmptyView);
         mAdapter = new AdapterDrops(this, mResults);

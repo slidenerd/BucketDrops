@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
-    
+
     <include
         android:id="@+id/empty_drops"
         layout="@layout/empty_drops" />
