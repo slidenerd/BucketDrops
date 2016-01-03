@@ -22,10 +22,17 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private LayoutInflater mInflater;
     private RealmResults<Drop> mResults;
     public static final String TAG = "VIVZ";
+    private AddListener mAddListener;
 
     public AdapterDrops(Context context, RealmResults<Drop> results) {
         mInflater = LayoutInflater.from(context);
         update(results);
+    }
+
+    public AdapterDrops(Context context, RealmResults<Drop> results, AddListener listener) {
+        mInflater = LayoutInflater.from(context);
+        update(results);
+        mAddListener = listener;
     }
 
     public void update(RealmResults<Drop> results) {
@@ -47,7 +54,7 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == FOOTER) {
             View view = mInflater.inflate(R.layout.footer, parent, false);
-            return new FooterHolder(view);
+            return new FooterHolder(view, mAddListener);
         } else {
             View view = mInflater.inflate(R.layout.row_drop, parent, false);
             return new DropHolder(view);
@@ -78,13 +85,26 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public static class FooterHolder extends RecyclerView.ViewHolder {
+    public static class FooterHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         Button mBtnAdd;
-
+        AddListener mListener;
         public FooterHolder(View itemView) {
             super(itemView);
             mBtnAdd = (Button) itemView.findViewById(R.id.btn_footer);
+            mBtnAdd.setOnClickListener(this);
+        }
+
+        public FooterHolder(View itemView, AddListener listener) {
+            super(itemView);
+            mBtnAdd = (Button) itemView.findViewById(R.id.btn_footer);
+            mBtnAdd.setOnClickListener(this);
+            mListener = listener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.add();
         }
     }
 }

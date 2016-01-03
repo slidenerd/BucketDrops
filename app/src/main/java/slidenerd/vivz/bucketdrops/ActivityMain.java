@@ -15,12 +15,13 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import slidenerd.vivz.bucketdrops.adapters.AdapterDrops;
+import slidenerd.vivz.bucketdrops.adapters.AddListener;
 import slidenerd.vivz.bucketdrops.adapters.Divider;
 import slidenerd.vivz.bucketdrops.beans.Drop;
 import slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView;
 
 //TODO add a layout manager for the RecyclerView
-public class ActivityMain extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity  {
 
     public static final String TAG = "VIVZ";
     Toolbar mToolbar;
@@ -34,6 +35,12 @@ public class ActivityMain extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+            showDialogAdd();
+        }
+    };
+    private AddListener mAddListener = new AddListener() {
+        @Override
+        public void add() {
             showDialogAdd();
         }
     };
@@ -64,7 +71,7 @@ public class ActivityMain extends AppCompatActivity {
         mRecycler.addItemDecoration(new Divider(this, LinearLayoutManager.VERTICAL));
         mRecycler.hideIfEmpty(mToolbar);
         mRecycler.showIfEmpty(mEmptyView);
-        mAdapter = new AdapterDrops(this, mResults);
+        mAdapter = new AdapterDrops(this, mResults, mAddListener);
         mRecycler.setAdapter(mAdapter);
         mBtnAdd.setOnClickListener(mBtnAddListener);
         setSupportActionBar(mToolbar);
