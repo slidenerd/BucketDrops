@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +18,12 @@ import io.realm.RealmResults;
 import slidenerd.vivz.bucketdrops.adapters.AdapterDrops;
 import slidenerd.vivz.bucketdrops.adapters.AddListener;
 import slidenerd.vivz.bucketdrops.adapters.Divider;
+import slidenerd.vivz.bucketdrops.adapters.SimpleTouchCallback;
 import slidenerd.vivz.bucketdrops.beans.Drop;
 import slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView;
 
 //TODO add a layout manager for the RecyclerView
-public class ActivityMain extends AppCompatActivity  {
+public class ActivityMain extends AppCompatActivity {
 
     public static final String TAG = "VIVZ";
     Toolbar mToolbar;
@@ -62,19 +64,22 @@ public class ActivityMain extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        mBtnAdd = (Button) findViewById(R.id.btn_add);
+        mBtnAdd.setOnClickListener(mBtnAddListener);
         mRealm = Realm.getDefaultInstance();
         mResults = mRealm.where(Drop.class).findAllAsync();
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mEmptyView = findViewById(R.id.empty_drops);
-        mBtnAdd = (Button) findViewById(R.id.btn_add);
         mRecycler = (BucketRecyclerView) findViewById(R.id.rv_drops);
         mRecycler.addItemDecoration(new Divider(this, LinearLayoutManager.VERTICAL));
         mRecycler.hideIfEmpty(mToolbar);
         mRecycler.showIfEmpty(mEmptyView);
-        mAdapter = new AdapterDrops(this, mResults, mAddListener);
+        mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener);
         mRecycler.setAdapter(mAdapter);
-        mBtnAdd.setOnClickListener(mBtnAddListener);
-        setSupportActionBar(mToolbar);
+        SimpleTouchCallback callback = new SimpleTouchCallback(mAdapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(mRecycler);
         initBackgroundImage();
     }
 
