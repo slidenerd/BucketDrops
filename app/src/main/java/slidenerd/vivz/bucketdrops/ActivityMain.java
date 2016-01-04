@@ -18,6 +18,7 @@ import io.realm.RealmResults;
 import slidenerd.vivz.bucketdrops.adapters.AdapterDrops;
 import slidenerd.vivz.bucketdrops.adapters.AddListener;
 import slidenerd.vivz.bucketdrops.adapters.Divider;
+import slidenerd.vivz.bucketdrops.adapters.MarkListener;
 import slidenerd.vivz.bucketdrops.adapters.SimpleTouchCallback;
 import slidenerd.vivz.bucketdrops.beans.Drop;
 import slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView;
@@ -55,9 +56,24 @@ public class ActivityMain extends AppCompatActivity {
         }
     };
 
+    private MarkListener mMarkListener = new MarkListener() {
+        @Override
+        public void onMark(int position) {
+            showDialogMark(position);
+        }
+    };
+
     private void showDialogAdd() {
         DialogAdd dialog = new DialogAdd();
         dialog.show(getSupportFragmentManager(), "Add");
+    }
+
+    private void showDialogMark(int position) {
+        DialogMark dialog = new DialogMark();
+        Bundle bundle = new Bundle();
+        bundle.putInt("POSITION", position);
+        dialog.setArguments(bundle);
+        dialog.show(getSupportFragmentManager(), "Mark");
     }
 
     @Override
@@ -75,7 +91,7 @@ public class ActivityMain extends AppCompatActivity {
         mRecycler.addItemDecoration(new Divider(this, LinearLayoutManager.VERTICAL));
         mRecycler.hideIfEmpty(mToolbar);
         mRecycler.showIfEmpty(mEmptyView);
-        mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener);
+        mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener, mMarkListener);
         mRecycler.setAdapter(mAdapter);
         SimpleTouchCallback callback = new SimpleTouchCallback(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
