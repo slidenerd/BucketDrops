@@ -8,4 +8,5 @@
     <color name="dark_blue">#241543</color>
     <color name="bg_drop_row_dark">#BD8E79BB</color>
     <color name="bg_row_drop_light">#4A8E79BB</color>
+    <color name="bg_dialog">#E30D0028</color>
 </resources>
