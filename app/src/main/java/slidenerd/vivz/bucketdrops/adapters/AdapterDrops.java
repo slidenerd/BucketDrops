@@ -1,6 +1,8 @@
 package slidenerd.vivz.bucketdrops.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import slidenerd.vivz.bucketdrops.R;
 import slidenerd.vivz.bucketdrops.beans.Drop;
+import slidenerd.vivz.bucketdrops.extras.Util;
 
 /**
  * Created by vivz on 30/12/15.
@@ -72,7 +75,8 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (holder instanceof DropHolder) {
             DropHolder dropHolder = (DropHolder) holder;
             Drop drop = mResults.get(position);
-            dropHolder.mTextWhat.setText(drop.getWhat());
+            dropHolder.setWhat(drop.getWhat());
+            dropHolder.setBackground(drop.isCompleted());
         }
     }
 
@@ -83,7 +87,6 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         } else {
             return mResults.size() + 1;
         }
-
     }
 
     @Override
@@ -96,23 +99,50 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    public void markComplete(int position) {
+        if (position < mResults.size()) {
+            mRealm.beginTransaction();
+            mResults.get(position).setCompleted(true);
+            mRealm.commitTransaction();
+            notifyItemChanged(position);
+        }
+    }
+
     public static class DropHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mTextWhat;
         TextView mTextWhen;
         MarkListener mMarkListener;
+        Context mContext;
+        View mItemView;
 
         public DropHolder(View itemView, MarkListener listener) {
             super(itemView);
+            mItemView = itemView;
+            mContext = itemView.getContext();
             itemView.setOnClickListener(this);
             mTextWhat = (TextView) itemView.findViewById(R.id.tv_what);
             mTextWhen = (TextView) itemView.findViewById(R.id.tv_when);
             mMarkListener = listener;
         }
 
+        public void setWhat(String what) {
+            mTextWhat.setText(what);
+        }
+
         @Override
         public void onClick(View v) {
             mMarkListener.onMark(getAdapterPosition());
+        }
+
+        public void setBackground(boolean completed) {
+            Drawable drawable;
+            if (completed) {
+                drawable = ContextCompat.getDrawable(mContext, R.color.bg_drop_complete);
+            } else {
+                drawable = ContextCompat.getDrawable(mContext, R.drawable.bg_row_drop);
+            }
+            Util.setBackground(mItemView, drawable);
         }
     }
 

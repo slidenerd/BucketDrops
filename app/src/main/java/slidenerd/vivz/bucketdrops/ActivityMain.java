@@ -17,6 +17,7 @@ import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import slidenerd.vivz.bucketdrops.adapters.AdapterDrops;
 import slidenerd.vivz.bucketdrops.adapters.AddListener;
+import slidenerd.vivz.bucketdrops.adapters.CompleteListener;
 import slidenerd.vivz.bucketdrops.adapters.Divider;
 import slidenerd.vivz.bucketdrops.adapters.MarkListener;
 import slidenerd.vivz.bucketdrops.adapters.SimpleTouchCallback;
@@ -63,6 +64,13 @@ public class ActivityMain extends AppCompatActivity {
         }
     };
 
+    private CompleteListener mCompleteListener = new CompleteListener() {
+        @Override
+        public void onComplete(int position) {
+            mAdapter.markComplete(position);
+        }
+    };
+
     private void showDialogAdd() {
         DialogAdd dialog = new DialogAdd();
         dialog.show(getSupportFragmentManager(), "Add");
@@ -73,6 +81,7 @@ public class ActivityMain extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putInt("POSITION", position);
         dialog.setArguments(bundle);
+        dialog.setCompleteListener(mCompleteListener);
         dialog.show(getSupportFragmentManager(), "Mark");
     }
 
