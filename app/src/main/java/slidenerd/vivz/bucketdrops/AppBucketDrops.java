@@ -7,6 +7,7 @@ import io.realm.RealmConfiguration;
 
 /**
  * Created by vivz on 30/12/15.
+ * TODO change to custom fonts wherever appropriate
  */
 public class AppBucketDrops extends Application{
     @Override

@@ -33,6 +33,7 @@ public class SimpleTouchCallback extends ItemTouchHelper.Callback {
         return false;
     }
 
+    //TODO prevent the footer from swiping by overriding onChildDraw and onChildDrawOver
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         mListener.onSwipe(viewHolder.getLayoutPosition());

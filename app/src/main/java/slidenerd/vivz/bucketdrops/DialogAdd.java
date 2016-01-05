@@ -18,6 +18,8 @@ import slidenerd.vivz.bucketdrops.beans.Drop;
 
 /**
  * Created by vivz on 28/12/15.
+ * TODO make it full screen + custom fonts
+ * TODO add custom date picker
  */
 public class DialogAdd extends DialogFragment {
 

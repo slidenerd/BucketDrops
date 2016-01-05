@@ -13,6 +13,7 @@ import slidenerd.vivz.bucketdrops.adapters.CompleteListener;
 
 /**
  * Created by vivz on 04/01/16.
+ * TODO make it full screen + custom fonts
  */
 public class DialogMark extends DialogFragment {
 

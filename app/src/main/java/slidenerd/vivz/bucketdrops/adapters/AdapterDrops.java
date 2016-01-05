@@ -19,6 +19,8 @@ import slidenerd.vivz.bucketdrops.extras.Util;
 
 /**
  * Created by vivz on 30/12/15.
+ * TODO add support for no items view while sorting
+ * TODO add getItemId and support animations
  */
 public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SwipeListener {
     public static final int ITEM = 0;
