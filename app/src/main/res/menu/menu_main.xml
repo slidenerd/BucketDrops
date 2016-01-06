@@ -7,6 +7,10 @@
         android:icon="@drawable/ic_action_add"
         android:title="@string/action_add"
         vivz:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_sort_none"
+        android:title="@string/action_none" />
     <item
         android:id="@+id/action_sort_descending_date"
         android:title="@string/action_most_time_left" />

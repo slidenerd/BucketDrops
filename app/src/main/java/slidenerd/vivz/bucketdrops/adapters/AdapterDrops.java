@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import slidenerd.vivz.bucketdrops.AppBucketDrops;
 import slidenerd.vivz.bucketdrops.R;
 import slidenerd.vivz.bucketdrops.beans.Drop;
 import slidenerd.vivz.bucketdrops.extras.Util;
@@ -23,8 +24,11 @@ import slidenerd.vivz.bucketdrops.extras.Util;
  * TODO add getItemId and support animations
  */
 public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SwipeListener {
+    public static final int COUNT_FOOTER = 1;
+    public static final int COUNT_NO_ITEMS = 1;
     public static final int ITEM = 0;
-    public static final int FOOTER = 1;
+    public static final int NO_ITEM = 1;
+    public static final int FOOTER = 2;
     private MarkListener mMarkListener;
 
     private LayoutInflater mInflater;
@@ -32,9 +36,12 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private RealmResults<Drop> mResults;
     public static final String TAG = "VIVZ";
     private AddListener mAddListener;
+    private int mFilterOption;
+    private Context mContext;
 
 
     public AdapterDrops(Context context, Realm realm, RealmResults<Drop> results, AddListener listener, MarkListener markListener) {
+        mContext = context;
         mInflater = LayoutInflater.from(context);
         update(results);
         mRealm = realm;
@@ -44,16 +51,45 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void update(RealmResults<Drop> results) {
         mResults = results;
+        mFilterOption = AppBucketDrops.load(mContext);
         notifyDataSetChanged();
+
+    }
+
+    @Override
+    public int getItemCount() {
+        if (!mResults.isEmpty()) {
+            return mResults.size() + COUNT_FOOTER;
+        } else {
+            if (mFilterOption == Filter.LEAST_TIME_LEFT
+                    || mFilterOption == Filter.MOST_TIME_LEFT
+                    || mFilterOption == Filter.NONE) {
+                return 0;
+            } else {
+                return COUNT_NO_ITEMS + COUNT_FOOTER;
+            }
+        }
     }
 
     @Override
     public int getItemViewType(int position) {
-        //We return an item if results are null or if the position is within the bounds of the results
-        if (mResults == null || position < mResults.size()) {
-            return ITEM;
+        if (!mResults.isEmpty()) {
+            if (position < mResults.size()) {
+                return ITEM;
+            } else {
+                return FOOTER;
+            }
         } else {
-            return FOOTER;
+            if (mFilterOption == Filter.COMPLETE ||
+                    mFilterOption == Filter.INCOMPLETE) {
+                if (position == 0) {
+                    return NO_ITEM;
+                } else {
+                    return FOOTER;
+                }
+            } else {
+                return ITEM;
+            }
         }
     }
 
@@ -62,6 +98,9 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (viewType == FOOTER) {
             View view = mInflater.inflate(R.layout.footer, parent, false);
             return new FooterHolder(view, mAddListener);
+        } else if (viewType == NO_ITEM) {
+            View view = mInflater.inflate(R.layout.no_item, parent, false);
+            return new NoItemsHolder(view);
         } else {
             View view = mInflater.inflate(R.layout.row_drop, parent, false);
             return new DropHolder(view, mMarkListener);
@@ -76,15 +115,6 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             dropHolder.setWhat(drop.getWhat());
             dropHolder.setWhen(drop.getWhen());
             dropHolder.setBackground(drop.isCompleted());
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        if (mResults == null || mResults.isEmpty()) {
-            return 0;
-        } else {
-            return mResults.size() + 1;
         }
     }
 
@@ -145,7 +175,14 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
         public void setWhen(long when) {
-            mTextWhen.setText(DateUtils.getRelativeTimeSpanString(when,System.currentTimeMillis(),DateUtils.DAY_IN_MILLIS,DateUtils.FORMAT_ABBREV_ALL));
+            mTextWhen.setText(DateUtils.getRelativeTimeSpanString(when, System.currentTimeMillis(), DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
+        }
+    }
+
+    public static class NoItemsHolder extends RecyclerView.ViewHolder {
+
+        public NoItemsHolder(View itemView) {
+            super(itemView);
         }
     }
 

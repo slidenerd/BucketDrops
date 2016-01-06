@@ -9,4 +9,6 @@
     <string name="action_complete">Complete</string>
     <string name="action_incomplete">Incomplete</string>
     <string name="action_add">Add</string>
+    <string name="action_none">None</string>
+    <string name="str_no_items">No Items To Display</string>
 </resources>

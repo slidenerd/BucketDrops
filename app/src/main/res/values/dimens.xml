@@ -28,4 +28,5 @@
 
     <!--Padding on both sides for the TextView inside row_drop.xml-->
     <dimen name="tv_what_horizontal_padding">22dp</dimen>
+    <dimen name="tv_no_items_vertical_padding">22dp</dimen>
 </resources>

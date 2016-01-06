@@ -1,12 +1,10 @@
 package slidenerd.vivz.bucketdrops;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +30,6 @@ import slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView;
 //TODO add a layout manager for the RecyclerView
 public class ActivityMain extends AppCompatActivity {
 
-    public static final String TAG = "VIVZ";
     Toolbar mToolbar;
     Button mBtnAdd;
     BucketRecyclerView mRecycler;
@@ -57,7 +54,6 @@ public class ActivityMain extends AppCompatActivity {
     private RealmChangeListener mChangeListener = new RealmChangeListener() {
         @Override
         public void onChange() {
-            Log.d(TAG, "onChange: was called");
             mAdapter.update(mResults);
         }
     };
@@ -100,7 +96,7 @@ public class ActivityMain extends AppCompatActivity {
         mBtnAdd = (Button) findViewById(R.id.btn_add);
         mBtnAdd.setOnClickListener(mBtnAddListener);
         mRealm = Realm.getDefaultInstance();
-        int filterOption = load();
+        int filterOption = AppBucketDrops.load(this);
         loadResults(filterOption);
         mEmptyView = findViewById(R.id.empty_drops);
         mRecycler = (BucketRecyclerView) findViewById(R.id.rv_drops);
@@ -130,27 +126,27 @@ public class ActivityMain extends AppCompatActivity {
             case R.id.action_add:
                 showDialogAdd();
                 break;
+            case R.id.action_sort_none:
+                filterOption = Filter.NONE;
+                break;
             case R.id.action_sort_ascending_date:
                 filterOption = Filter.LEAST_TIME_LEFT;
-                save(Filter.LEAST_TIME_LEFT);
                 break;
             case R.id.action_sort_descending_date:
                 filterOption = Filter.MOST_TIME_LEFT;
-                save(Filter.MOST_TIME_LEFT);
                 break;
             case R.id.action_show_complete:
                 filterOption = Filter.COMPLETE;
-                save(Filter.COMPLETE);
                 break;
             case R.id.action_show_incomplete:
                 filterOption = Filter.INCOMPLETE;
-                save(Filter.INCOMPLETE);
                 break;
             default:
                 handled = false;
                 break;
         }
         loadResults(filterOption);
+        AppBucketDrops.save(this, filterOption);
         return handled;
     }
 
@@ -175,18 +171,6 @@ public class ActivityMain extends AppCompatActivity {
         mResults.addChangeListener(mChangeListener);
     }
 
-    private void save(int filterOption) {
-        SharedPreferences pref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("filter", filterOption);
-        editor.apply();
-    }
-
-    private int load() {
-        SharedPreferences pref = getPreferences(MODE_PRIVATE);
-        int filterOption = pref.getInt("filter", Filter.NONE);
-        return filterOption;
-    }
 
     @Override
     protected void onStart() {
