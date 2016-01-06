@@ -24,11 +24,11 @@ import slidenerd.vivz.bucketdrops.adapters.CompleteListener;
 import slidenerd.vivz.bucketdrops.adapters.Divider;
 import slidenerd.vivz.bucketdrops.adapters.Filter;
 import slidenerd.vivz.bucketdrops.adapters.MarkListener;
+import slidenerd.vivz.bucketdrops.adapters.ResetListener;
 import slidenerd.vivz.bucketdrops.adapters.SimpleTouchCallback;
 import slidenerd.vivz.bucketdrops.beans.Drop;
 import slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView;
 
-//TODO add a layout manager for the RecyclerView
 public class ActivityMain extends AppCompatActivity {
 
     Toolbar mToolbar;
@@ -72,6 +72,13 @@ public class ActivityMain extends AppCompatActivity {
             mAdapter.markComplete(position);
         }
     };
+    private ResetListener mResetListener = new ResetListener() {
+        @Override
+        public void onReset() {
+            AppBucketDrops.save(ActivityMain.this, Filter.NONE);
+            loadResults(Filter.NONE);
+        }
+    };
 
     private void showDialogAdd() {
         DialogAdd dialog = new DialogAdd();
@@ -87,7 +94,6 @@ public class ActivityMain extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "Mark");
     }
 
-    //TODO load items as per the user's previous sorting option
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +111,7 @@ public class ActivityMain extends AppCompatActivity {
         mRecycler.setItemAnimator(new DefaultItemAnimator());
         mRecycler.hideIfEmpty(mToolbar);
         mRecycler.showIfEmpty(mEmptyView);
-        mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener, mMarkListener);
+        mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener, mMarkListener, mResetListener);
         mAdapter.setHasStableIds(true);
         mRecycler.setAdapter(mAdapter);
         SimpleTouchCallback callback = new SimpleTouchCallback(mAdapter);

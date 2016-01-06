@@ -24,7 +24,6 @@ public class DialogMark extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_completed:
-                    //TODO handle the action here to mark the item as complete
                     markAsComplete();
                     break;
             }
