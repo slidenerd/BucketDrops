@@ -20,8 +20,8 @@ import slidenerd.vivz.bucketdrops.extras.Util;
 
 /**
  * Created by vivz on 30/12/15.
- * TODO add support for no items view while sorting
  * TODO add getItemId and support animations
+ * TODO add a reset listener when the person swipes to delete an item when sorting under complete or incomplete
  */
 public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SwipeListener {
     public static final int COUNT_FOOTER = 1;
@@ -54,6 +54,14 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         mFilterOption = AppBucketDrops.load(mContext);
         notifyDataSetChanged();
 
+    }
+
+    @Override
+    public long getItemId(int position) {
+        if (position < mResults.size()) {
+            return mResults.get(position).getAdded();
+        }
+        return RecyclerView.NO_ID;
     }
 
     @Override

@@ -2,6 +2,7 @@ package slidenerd.vivz.bucketdrops;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -101,9 +102,11 @@ public class ActivityMain extends AppCompatActivity {
         mEmptyView = findViewById(R.id.empty_drops);
         mRecycler = (BucketRecyclerView) findViewById(R.id.rv_drops);
         mRecycler.addItemDecoration(new Divider(this, LinearLayoutManager.VERTICAL));
+        mRecycler.setItemAnimator(new DefaultItemAnimator());
         mRecycler.hideIfEmpty(mToolbar);
         mRecycler.showIfEmpty(mEmptyView);
         mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener, mMarkListener);
+        mAdapter.setHasStableIds(true);
         mRecycler.setAdapter(mAdapter);
         SimpleTouchCallback callback = new SimpleTouchCallback(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
