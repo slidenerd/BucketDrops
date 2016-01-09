@@ -34,10 +34,16 @@ public class DialogMark extends DialogFragment {
 
     private void markAsComplete() {
         Bundle arguments = getArguments();
-        if(mListener!=null && arguments!=null){
+        if (mListener != null && arguments != null) {
             int position = arguments.getInt("POSITION");
             mListener.onComplete(position);
         }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme);
     }
 
     @Nullable

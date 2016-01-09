@@ -98,11 +98,12 @@ public class ActivityMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mRealm = Realm.getDefaultInstance();
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mBtnAdd = (Button) findViewById(R.id.btn_add);
         mBtnAdd.setOnClickListener(mBtnAddListener);
-        mRealm = Realm.getDefaultInstance();
+
         int filterOption = AppBucketDrops.load(this);
         loadResults(filterOption);
         mEmptyView = findViewById(R.id.empty_drops);
