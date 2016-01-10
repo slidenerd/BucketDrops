@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/dark_blue"
-    app:popupTheme="@style/ToolbarStyle">
+    android:background="@color/dark_blue">
 
 </android.support.v7.widget.Toolbar>
