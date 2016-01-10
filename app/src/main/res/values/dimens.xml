@@ -33,4 +33,5 @@
     <dimen name="tv_picker_item_width">96dp</dimen>
     <dimen name="tv_picker_item_font_size">24sp</dimen>
     <dimen name="tv_picker_item_drawable_padding">16dp</dimen>
+    <dimen name="bg_picker_item_corner_radius">4dp</dimen>
 </resources>

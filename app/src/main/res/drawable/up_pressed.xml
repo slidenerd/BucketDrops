@@ -5,11 +5,14 @@
         <shape>
             <solid android:color="@android:color/transparent" />
             <size android:width="@dimen/tv_picker_item_width" />
+            <corners
+                android:topLeftRadius="@dimen/bg_picker_item_corner_radius"
+                android:topRightRadius="@dimen/bg_picker_item_corner_radius" />
         </shape>
     </item>
-    <item
-        android:drawable="@drawable/ic_up_pressed"
-        android:gravity="center">
-
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_up_pressed" />
     </item>
 </layer-list>
