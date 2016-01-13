@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -25,6 +26,7 @@ public class BucketPickerView extends LinearLayout implements View.OnTouchListen
     public static final int TOP = 1;
     public static final int RIGHT = 2;
     public static final int BOTTOM = 3;
+    public static final int DELAY = 250;
     private Calendar mCalendar;
     private TextView mTextDate;
     private TextView mTextMonth;
@@ -33,17 +35,22 @@ public class BucketPickerView extends LinearLayout implements View.OnTouchListen
     private String TAG = "VIVZ";
     private boolean mIncrement;
     private boolean mDecrement;
-    public static final int DELAY = 250;
+
+    private Drawable mUpNormal;
+    private Drawable mUpPressed;
+    private Drawable mDownNormal;
+    private Drawable mDownPressed;
+
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            if(mIncrement){
+            if (mIncrement) {
                 increment(mActiveId);
             }
-            if(mDecrement){
+            if (mDecrement) {
                 decrement(mActiveId);
             }
-            if(mIncrement || mDecrement){
+            if (mIncrement || mDecrement) {
                 mHandler.sendEmptyMessageDelayed(MESSAGE_WHAT, DELAY);
             }
             return true;
@@ -71,6 +78,10 @@ public class BucketPickerView extends LinearLayout implements View.OnTouchListen
         View view = LayoutInflater.from(context).inflate(R.layout.bucket_picker_view, this);
         mCalendar = Calendar.getInstance();
         mFormatter = new SimpleDateFormat("MMM");
+        mUpNormal = ContextCompat.getDrawable(context, R.drawable.up_normal);
+        mUpPressed = ContextCompat.getDrawable(context, R.drawable.up_pressed);
+        mDownNormal = ContextCompat.getDrawable(context, R.drawable.down_normal);
+        mDownPressed = ContextCompat.getDrawable(context, R.drawable.down_pressed);
     }
 
     @Override
@@ -134,9 +145,11 @@ public class BucketPickerView extends LinearLayout implements View.OnTouchListen
                     increment(textView.getId());
                     mHandler.removeMessages(MESSAGE_WHAT);
                     mHandler.sendEmptyMessageDelayed(MESSAGE_WHAT, DELAY);
+                    toggleDrawable(textView, true);
                 }
                 if (isActionUpOrCancel(event)) {
                     mIncrement = false;
+                    toggleDrawable(textView, false);
                 }
 
             } else if (bottomDrawableHit(textView, bottomBounds.height(), x, y)) {
@@ -145,13 +158,16 @@ public class BucketPickerView extends LinearLayout implements View.OnTouchListen
                     decrement(textView.getId());
                     mHandler.removeMessages(MESSAGE_WHAT);
                     mHandler.sendEmptyMessageDelayed(MESSAGE_WHAT, DELAY);
+                    toggleDrawable(textView, true);
                 }
                 if (isActionUpOrCancel(event)) {
                     mDecrement = false;
+                    toggleDrawable(textView, false);
                 }
             } else {
                 mIncrement = false;
                 mDecrement = false;
+                toggleDrawable(textView, false);
             }
         }
     }
@@ -227,4 +243,16 @@ public class BucketPickerView extends LinearLayout implements View.OnTouchListen
         return drawables[BOTTOM] != null;
     }
 
+    private void toggleDrawable(TextView textView, boolean pressed) {
+        if (pressed) {
+            if (mIncrement) {
+                textView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.up_pressed, 0, R.drawable.down_normal);
+            }
+            if (mDecrement) {
+                textView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.up_normal, 0, R.drawable.down_pressed);
+            }
+        } else {
+            textView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.up_normal, 0, R.drawable.down_normal);
+        }
+    }
 }
