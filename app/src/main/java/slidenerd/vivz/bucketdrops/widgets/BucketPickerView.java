@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import slidenerd.vivz.bucketdrops.AppBucketDrops;
 import slidenerd.vivz.bucketdrops.R;
 
 /**
@@ -118,6 +119,7 @@ public class BucketPickerView extends LinearLayout implements View.OnTouchListen
         mTextDate = (TextView) this.findViewById(R.id.tv_date);
         mTextMonth = (TextView) this.findViewById(R.id.tv_month);
         mTextYear = (TextView) this.findViewById(R.id.tv_year);
+        AppBucketDrops.setRalewayRegular(getContext(), mTextDate, mTextMonth, mTextYear);
         mTextDate.setOnTouchListener(this);
         mTextMonth.setOnTouchListener(this);
         mTextYear.setOnTouchListener(this);

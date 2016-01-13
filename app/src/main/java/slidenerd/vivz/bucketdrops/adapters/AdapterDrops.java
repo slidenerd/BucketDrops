@@ -20,7 +20,7 @@ import slidenerd.vivz.bucketdrops.extras.Util;
 
 /**
  * Created by vivz on 30/12/15.
- * TODO add a reset listener when the person swipes to delete an item when sorting under complete or incomplete
+ * TODO use a custom font for the items text
  */
 public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SwipeListener {
     public static final int COUNT_FOOTER = 1;
@@ -140,7 +140,7 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private void resetFilterIfEmpty() {
         if (mResults.isEmpty() && (mFilterOption == Filter.COMPLETE ||
-                mFilterOption == Filter.INCOMPLETE)){
+                mFilterOption == Filter.INCOMPLETE)) {
             mResetListener.onReset();
         }
     }
@@ -169,6 +169,7 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             itemView.setOnClickListener(this);
             mTextWhat = (TextView) itemView.findViewById(R.id.tv_what);
             mTextWhen = (TextView) itemView.findViewById(R.id.tv_when);
+            AppBucketDrops.setRalewayRegular(mContext, mTextWhat, mTextWhen);
             mMarkListener = listener;
         }
 
@@ -205,12 +206,15 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public static class FooterHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        Context mContext;
         Button mBtnAdd;
         AddListener mListener;
 
         public FooterHolder(View itemView) {
             super(itemView);
+            mContext = itemView.getContext();
             mBtnAdd = (Button) itemView.findViewById(R.id.btn_footer);
+            AppBucketDrops.setRalewayRegular(mContext, mBtnAdd);
             mBtnAdd.setOnClickListener(this);
         }
 

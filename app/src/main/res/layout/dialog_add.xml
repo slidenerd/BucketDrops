@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_dialog">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_dialog">
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/tv_title"
@@ -32,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
+            android:background="@drawable/bg_et_drop"
             android:hint="@string/hint_et_drop"
             android:inputType="textVisiblePassword"
             android:padding="16dp" />
@@ -49,7 +51,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/bpv_date"
+            android:background="@drawable/bg_btn_add_it"
             android:text="@string/str_add_it"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="28sp" />
     </RelativeLayout>
 </ScrollView>

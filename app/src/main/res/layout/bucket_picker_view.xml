@@ -7,24 +7,21 @@
 
     <TextView
         android:id="@+id/tv_month"
-        style="@style/DatePickerItemStyle"
-        android:text="JAN" />
+        style="@style/DatePickerItemStyle" />
 
     <Space
-        android:layout_width="32dp"
+        android:layout_width="@dimen/bpv_space"
         android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/tv_date"
-        style="@style/DatePickerItemStyle"
-        android:text="10" />
+        style="@style/DatePickerItemStyle" />
 
     <Space
-        android:layout_width="32dp"
+        android:layout_width="@dimen/bpv_space"
         android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/tv_year"
-        style="@style/DatePickerItemStyle"
-        android:text="2021" />
+        style="@style/DatePickerItemStyle" />
 </LinearLayout>

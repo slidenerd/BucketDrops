@@ -13,7 +13,7 @@ import slidenerd.vivz.bucketdrops.adapters.CompleteListener;
 
 /**
  * Created by vivz on 04/01/16.
- * TODO make it full screen + custom fonts
+ * TODO custom fonts
  */
 public class DialogMark extends DialogFragment {
 
@@ -57,6 +57,7 @@ public class DialogMark extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         mBtnClose = (ImageButton) view.findViewById(R.id.btn_close);
         mBtnCompleted = (Button) view.findViewById(R.id.btn_completed);
+        AppBucketDrops.setRalewayRegular(getActivity(), mBtnCompleted);
         mBtnClose.setOnClickListener(mBtnClickListener);
         mBtnCompleted.setOnClickListener(mBtnClickListener);
     }
