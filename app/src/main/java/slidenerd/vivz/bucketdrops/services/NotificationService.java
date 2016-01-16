@@ -3,7 +3,6 @@ package slidenerd.vivz.bucketdrops.services;
 import android.app.IntentService;
 import android.app.Notification;
 import android.content.Intent;
-import android.util.Log;
 
 import br.com.goncalves.pugnotification.notification.PugNotification;
 import io.realm.Realm;
@@ -20,16 +19,13 @@ import slidenerd.vivz.bucketdrops.beans.Drop;
  * TODO: Customize class - update intent actions and extra parameters.
  */
 public class NotificationService extends IntentService {
-    public static final String TAG = "VIVZ";
 
     public NotificationService() {
         super("NotificationService");
-        Log.d(TAG, "NotificationService: ");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.d(TAG, "onHandleIntent: ");
         Realm realm = null;
         try {
             realm = Realm.getDefaultInstance();
@@ -69,7 +65,6 @@ public class NotificationService extends IntentService {
             return false;
         } else {
             long difference90 = (long) (0.9 * (when - added));
-            Log.d(TAG, "isNotificationNeeded: now: " + now + " sum: " + (added + difference90));
             return (now > (added + difference90)) ? true : false;
         }
     }

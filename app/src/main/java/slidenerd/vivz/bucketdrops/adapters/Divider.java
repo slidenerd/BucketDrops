@@ -16,7 +16,6 @@ import slidenerd.vivz.bucketdrops.R;
  */
 public class Divider extends RecyclerView.ItemDecoration {
 
-    public static final String TAG = "VIVZ";
     private Drawable mDivider;
     private int mOrientation;
 

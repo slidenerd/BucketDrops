@@ -20,7 +20,6 @@ import slidenerd.vivz.bucketdrops.extras.Util;
 
 /**
  * Created by vivz on 30/12/15.
- * TODO use a custom font for the items text
  */
 public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SwipeListener {
     public static final int COUNT_FOOTER = 1;
@@ -34,7 +33,6 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private LayoutInflater mInflater;
     private Realm mRealm;
     private RealmResults<Drop> mResults;
-    public static final String TAG = "VIVZ";
     private AddListener mAddListener;
     private int mFilterOption;
     private Context mContext;

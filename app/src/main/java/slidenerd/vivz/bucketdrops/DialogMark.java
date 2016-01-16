@@ -17,6 +17,7 @@ import slidenerd.vivz.bucketdrops.adapters.CompleteListener;
  */
 public class DialogMark extends DialogFragment {
 
+    public static final String EXTRA_POSITION = "position";
     private ImageButton mBtnClose;
     private Button mBtnCompleted;
     private View.OnClickListener mBtnClickListener = new View.OnClickListener() {
@@ -35,7 +36,7 @@ public class DialogMark extends DialogFragment {
     private void markAsComplete() {
         Bundle arguments = getArguments();
         if (mListener != null && arguments != null) {
-            int position = arguments.getInt("POSITION");
+            int position = arguments.getInt(EXTRA_POSITION);
             mListener.onComplete(position);
         }
     }

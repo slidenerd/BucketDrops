@@ -16,7 +16,8 @@ import slidenerd.vivz.bucketdrops.adapters.Filter;
  * TODO change to custom fonts wherever appropriate
  */
 public class AppBucketDrops extends Application {
-    public static final String TAG = "VIVZ";
+
+    static String FILTER_OPTION = "filter";
 
     @Override
     public void onCreate() {
@@ -29,13 +30,13 @@ public class AppBucketDrops extends Application {
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("filter", filterOption);
+        editor.putInt(FILTER_OPTION, filterOption);
         editor.apply();
     }
 
     public static int load(Context context) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        int filterOption = pref.getInt("filter", Filter.NONE);
+        int filterOption = pref.getInt(FILTER_OPTION, Filter.NONE);
         return filterOption;
     }
 

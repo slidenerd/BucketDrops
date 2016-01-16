@@ -9,7 +9,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
  */
 public class SimpleTouchCallback extends ItemTouchHelper.Callback {
     private SwipeListener mListener;
-    public static final String TAG = "VIVZ";
 
     public SimpleTouchCallback(SwipeListener listener) {
         mListener = listener;

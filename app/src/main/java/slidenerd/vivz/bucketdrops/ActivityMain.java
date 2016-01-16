@@ -32,7 +32,10 @@ import slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView;
 
 public class ActivityMain extends AppCompatActivity {
 
-    private static final String TAG = "VIVZ";
+    public static final String TAG_DIALOG_ADD = "add";
+    public static final String TAG_DIALOG_MARK = "mark";
+    public static final String FIELD_WHEN = "when";
+    public static final String FIELD_COMPLETED = "completed";
     Toolbar mToolbar;
     Button mBtnAdd;
     BucketRecyclerView mRecycler;
@@ -84,16 +87,16 @@ public class ActivityMain extends AppCompatActivity {
 
     private void showDialogAdd() {
         DialogAdd dialog = new DialogAdd();
-        dialog.show(getSupportFragmentManager(), "Add");
+        dialog.show(getSupportFragmentManager(), TAG_DIALOG_ADD);
     }
 
     private void showDialogMark(int position) {
         DialogMark dialog = new DialogMark();
         Bundle bundle = new Bundle();
-        bundle.putInt("POSITION", position);
+        bundle.putInt(DialogMark.EXTRA_POSITION, position);
         dialog.setArguments(bundle);
         dialog.setCompleteListener(mCompleteListener);
-        dialog.show(getSupportFragmentManager(), "Mark");
+        dialog.show(getSupportFragmentManager(), TAG_DIALOG_MARK);
     }
 
     @Override
@@ -169,16 +172,16 @@ public class ActivityMain extends AppCompatActivity {
                 mResults = mRealm.where(Drop.class).findAllAsync();
                 break;
             case Filter.LEAST_TIME_LEFT:
-                mResults = mRealm.where(Drop.class).findAllSortedAsync("when");
+                mResults = mRealm.where(Drop.class).findAllSortedAsync(FIELD_WHEN);
                 break;
             case Filter.MOST_TIME_LEFT:
-                mResults = mRealm.where(Drop.class).findAllSortedAsync("when", Sort.DESCENDING);
+                mResults = mRealm.where(Drop.class).findAllSortedAsync(FIELD_WHEN, Sort.DESCENDING);
                 break;
             case Filter.COMPLETE:
-                mResults = mRealm.where(Drop.class).equalTo("completed", true).findAllAsync();
+                mResults = mRealm.where(Drop.class).equalTo(FIELD_COMPLETED, true).findAllAsync();
                 break;
             case Filter.INCOMPLETE:
-                mResults = mRealm.where(Drop.class).equalTo("completed", false).findAllAsync();
+                mResults = mRealm.where(Drop.class).equalTo(FIELD_COMPLETED, false).findAllAsync();
                 break;
         }
         mResults.addChangeListener(mChangeListener);

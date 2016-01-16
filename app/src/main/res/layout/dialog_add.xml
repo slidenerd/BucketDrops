@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_dialog">
+    style="@style/DialogRootStyle">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp">
+        android:padding="@dimen/dialog_padding">
 
         <TextView
             android:id="@+id/tv_title"
@@ -20,13 +18,10 @@
 
         <ImageButton
             android:id="@+id/btn_close"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
+            style="@style/DialogCloseButtonStyle"
             android:layout_alignBottom="@id/tv_title"
-            android:layout_alignParentRight="true"
             android:layout_alignTop="@id/tv_title"
-            android:background="@null"
-            android:src="@drawable/ic_close" />
+            />
 
         <EditText
             android:id="@+id/et_drop"
@@ -36,15 +31,15 @@
             android:background="@drawable/bg_et_drop"
             android:hint="@string/hint_et_drop"
             android:inputType="textVisiblePassword"
-            android:padding="16dp" />
+            android:padding="@dimen/et_drop_padding" />
 
         <slidenerd.vivz.bucketdrops.widgets.BucketPickerView
             android:id="@+id/bpv_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_drop"
-            android:layout_marginBottom="64dp"
-            android:layout_marginTop="64dp" />
+            android:layout_marginBottom="@dimen/bpv_margin_vertical"
+            android:layout_marginTop="@dimen/bpv_margin_vertical" />
 
         <Button
             android:id="@+id/btn_add_it"
@@ -54,6 +49,6 @@
             android:background="@drawable/bg_btn_add_it"
             android:text="@string/str_add_it"
             android:textAllCaps="false"
-            android:textSize="28sp" />
+            android:textSize="@dimen/btn_add_it_font_size" />
     </RelativeLayout>
 </ScrollView>

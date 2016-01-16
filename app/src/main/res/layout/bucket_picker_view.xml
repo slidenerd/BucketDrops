@@ -7,21 +7,17 @@
 
     <TextView
         android:id="@+id/tv_month"
-        style="@style/DatePickerItemStyle" />
+        style="@style/BucketPickerItemStyle" />
 
-    <Space
-        android:layout_width="@dimen/bpv_space"
-        android:layout_height="match_parent" />
+    <Space style="@style/BucketPickerSpaceStyle" />
 
     <TextView
         android:id="@+id/tv_date"
-        style="@style/DatePickerItemStyle" />
+        style="@style/BucketPickerItemStyle" />
 
-    <Space
-        android:layout_width="@dimen/bpv_space"
-        android:layout_height="match_parent" />
+    <Space style="@style/BucketPickerSpaceStyle" />
 
     <TextView
         android:id="@+id/tv_year"
-        style="@style/DatePickerItemStyle" />
+        style="@style/BucketPickerItemStyle" />
 </LinearLayout>

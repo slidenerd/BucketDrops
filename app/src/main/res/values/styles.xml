@@ -22,7 +22,7 @@
         <item name="android:textColor">@color/dark_blue</item>
     </style>
 
-    <style name="DatePickerItemStyle">
+    <style name="BucketPickerItemStyle">
         <item name="android:layout_width">@dimen/tv_picker_item_width</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@drawable/bg_picker_item_background</item>
@@ -33,5 +33,25 @@
         <item name="android:drawablePadding">@dimen/tv_picker_item_drawable_padding</item>
         <item name="android:drawableTop">@drawable/up_normal</item>
         <item name="android:drawableBottom">@drawable/down_normal</item>
+    </style>
+
+    <style name="BucketPickerSpaceStyle">
+        <item name="android:layout_width">@dimen/bpv_space</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="DialogCloseButtonStyle">
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:src">@drawable/ic_close</item>
+    </style>
+
+    <style name="DialogRootStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/bg_dialog</item>
+
     </style>
 </resources>

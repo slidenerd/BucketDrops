@@ -30,9 +30,22 @@
     <dimen name="tv_what_horizontal_padding">22dp</dimen>
     <dimen name="tv_no_items_vertical_padding">22dp</dimen>
 
+    <!--The dimensions applicable to the layout of our Custom Date Picker View-->
     <dimen name="tv_picker_item_width">92dp</dimen>
     <dimen name="tv_picker_item_font_size">24sp</dimen>
     <dimen name="tv_picker_item_drawable_padding">14dp</dimen>
     <dimen name="bg_picker_item_corner_radius">4dp</dimen>
     <dimen name="bpv_space">16dp</dimen>
+
+    <dimen name="dialog_padding">24dp</dimen>
+
+    <!--Settings applicable to the items inside the layout of the Dialog Add-->
+    <dimen name="et_drop_padding">16dp</dimen>
+    <dimen name="bpv_margin_vertical">64dp</dimen>
+    <dimen name="btn_add_it_font_size">28sp</dimen>
+    <dimen name="btn_completed_vertical_margin">96dp</dimen>
+    <dimen name="btn_completed_drawable_padding">16dp</dimen>
+    <dimen name="btn_completed_font_size">24sp</dimen>
+    <dimen name="footer_vertical_margin">128dp</dimen>
+    <dimen name="footer_horizontal_margin">60dp</dimen>
 </resources>

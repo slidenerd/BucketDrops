@@ -16,6 +16,9 @@ import slidenerd.vivz.bucketdrops.services.NotificationService;
  * Created by vivz on 31/12/15.
  */
 public class Util {
+    public static final int DELAY = 1000;
+    public static final int FREQUENCY = 1000 * 3600 * 4;
+
     public static void showViews(List<View> views) {
         for (View view : views) {
             view.setVisibility(View.VISIBLE);
@@ -40,10 +43,10 @@ public class Util {
         }
     }
 
-    public static void scheduleAlarm(Context context){
+    public static void scheduleAlarm(Context context) {
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, NotificationService.class);
         PendingIntent pendingIntent = PendingIntent.getService(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, 240000, pendingIntent);
+        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, DELAY, FREQUENCY, pendingIntent);
     }
 }
