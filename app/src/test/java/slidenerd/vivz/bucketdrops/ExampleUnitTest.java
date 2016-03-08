@@ -1,4 +1,4 @@
-package slidenerd.vivz.bucketdrops;
+package appcourse.vivz.bucketdrops;
 
 import org.junit.Test;
 

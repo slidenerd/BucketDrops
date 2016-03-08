@@ -33,7 +33,7 @@
             android:inputType="textVisiblePassword"
             android:padding="@dimen/et_drop_padding" />
 
-        <slidenerd.vivz.bucketdrops.widgets.BucketPickerView
+        <appcourse.vivz.bucketdrops.widgets.BucketPickerView
             android:id="@+id/bpv_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
