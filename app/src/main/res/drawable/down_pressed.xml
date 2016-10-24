@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <solid android:color="@android:color/transparent" />
+            <size android:width="@dimen/tv_picker_item_width" />
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/ic_down_pressed"
+        android:gravity="center"></item>
+</layer-list>
