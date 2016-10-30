@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="slidenerd.vivz.bucketdrops.ActivityMain">
 
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <!--Warning! This code will crash as we are attempting to load the entire image in the main thread in one go-->
-    <ImageView
-        android:id="@+id/iv_background"
+    <slidenerd.vivz.bucketdrops.widgets.BucketRecyclerView
+        android:id="@+id/rv_drops"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@id/toolbar"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
-    <include layout="@layout/empty_drops" />
+    <include
+        android:id="@+id/empty_drops"
+        layout="@layout/empty_drops" />
+
 </RelativeLayout>
