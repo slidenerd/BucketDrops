@@ -26,6 +26,7 @@
         android:id="@+id/et_drop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textVisiblePassword"
         android:layout_below="@id/tv_title"
         android:hint="@string/hint_et_drop"
         android:padding="16dp" />
