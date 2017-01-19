@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <solid android:color="@color/purple" />
+            <size android:width="@dimen/tv_picker_item_width" />
+            <corners
+                android:topLeftRadius="@dimen/bg_picker_item_corner_radius"
+                android:topRightRadius="@dimen/bg_picker_item_corner_radius" />
+        </shape>
+    </item>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_up_normal" />
+    </item>
+</layer-list>
