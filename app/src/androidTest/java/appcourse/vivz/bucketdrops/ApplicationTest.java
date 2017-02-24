@@ -1,4 +1,4 @@
-package slidenerd.vivz.bucketdrops;
+package appcourse.vivz.bucketdrops;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

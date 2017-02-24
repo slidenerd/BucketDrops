@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_footer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/footer_vertical_margin"
+    android:layout_marginLeft="@dimen/footer_horizontal_margin"
+    android:layout_marginRight="@dimen/footer_horizontal_margin"
+    android:layout_marginTop="@dimen/footer_vertical_margin"
+    android:background="@drawable/bg_btn_add_it"
+    android:text="@string/str_add_drop"
+    android:textAllCaps="false"
+    android:textSize="@dimen/btn_add_font_size" />

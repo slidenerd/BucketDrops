@@ -3,4 +3,8 @@
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
     <dimen name="activity_horizontal_margin">64dp</dimen>
+    <dimen name="tv_picker_item_drawable_padding">32dp</dimen>
+    <dimen name="tv_picker_item_width">184dp</dimen>
+    <dimen name="tv_picker_item_font_size">48sp</dimen>
+    <dimen name="bpv_space">32dp</dimen>
 </resources>
